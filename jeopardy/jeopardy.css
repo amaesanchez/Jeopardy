@@ -19,3 +19,8 @@ body {
   font-size: 1em;
   margin: 0.5em 0;
 }
+
+/** game table */
+#gameboard {
+  /* display: hidden; */
+}

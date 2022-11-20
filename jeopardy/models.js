@@ -26,11 +26,13 @@
 class Game {
 
   /** Construct each Game instance from:
-   *  - numCategories: integer
-   *  - numCluesPerCat: integer
+   *  - numCategories: integer(6)
+   *  - numCluesPerCat: integer (5)
    */
   constructor(numCategories, numCluesPerCat) {
-
+    this.numCategories = numCategories;
+    this.numCluesPerCat = numCluesPerCat;
+    this.categories = [];
   }
 
   /**
@@ -45,6 +47,8 @@ class Game {
    * [{id, title, clues_count}, {id, title, clues_count}, ... ]
    */
   async fetchCategoryBatch(count) {
+    console.debug("fetchCatBatch");
+
     const response = await axios.get(
         `${BASE_API_URL}categories`, {params: { count }});
 
@@ -56,7 +60,17 @@ class Game {
    * Returns array of category ids, eg [4, 12, 5, 9, 20, 1]
    */
   async getRandomCategoryIds() {
+    console.debug("getRandomCatIds");
 
+    let categoryBatch = await this.fetchCategoryBatch(100) //100??
+
+    // get the first 6 categories in randomized categoryBatch
+    const randomizedBatch = FYRandom(categoryBatch);
+    const randomCategories = randomizedBatch.slice(0, this.numCategories);
+
+    const randomIDs = randomCategories.map(cat => cat.id);
+
+    return randomIDs;
   }
 
 
@@ -67,16 +81,17 @@ class Game {
    * - populate categories array
    */
   async populateCategoryData() {
-    // Note: We've provided some structure for this function, but you'll need 
-    // to fill in the value for the catIds variable and the body of the loop 
+    // Note: We've provided some structure for this function, but you'll need
+    // to fill in the value for the catIds variable and the body of the loop
     // below.
-    const catIds = ______
+    const catIds = await this.getRandomCategoryIds();
 
     for (let catId of catIds) {
-
-      // TODO: Add necessary code to fetch category data & generate 
+      // TODO: Add necessary code to fetch category data & generate
       // new instance for each catId. Populate categories array accordingly.
 
+      const category = await Category.getCategory(catId, this.numCluesPerCat);
+      this.categories.push(category);
     }
   }
 }
@@ -94,7 +109,8 @@ class Category {
    *  - clues: array of Clue instances [Clue {}, Clue {}, ...]
    */
   constructor(title, clues) {
-
+    this.title = title;
+    this.clues = clues;
   }
 
   /** Static method to fetch all the information for a particular
@@ -107,8 +123,14 @@ class Category {
    *
    * { id, title, clues_count, clues }
    */
-  static async fetchCategoryDetail(id) {
+  static async fetchCategoryDetail(catId) {
+    const response = await axios({
+      url: `${BASE_API_URL}/category`,
+      method: "GET",
+      params: { "id": catId }
+    });
 
+    return response.data;
   }
 
   /** Static method to return new Category instance with data about a category:
@@ -127,7 +149,13 @@ class Category {
    *   ]
    */
   static async getCategory(id, numCluesPerCat) {
+    // this is used to populate this.categories
+    const allCatData = await this.fetchCategoryDetail(id);
 
+    const allClueData = allCatData.clues.slice(0, numCluesPerCat);
+    const clues = allClueData.map(clue => new Clue(clue.question, clue.answer));
+
+    return new Category(allCatData.title, clues);
   }
 }
 
@@ -161,4 +189,23 @@ class Clue {
       this.showing = "answer";
     }
   }
+}
+
+/** Fisher-Yates Shuffle used to get random array of category IDs */
+function FYRandom(array) {
+  let currentIndex = array.length
+  let randomIndex = null;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+    // Pick a remaining element and decrement currentIndex
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // swap value at randomIndex with the current element.
+    [array[currentIndex], array[randomIndex]] =
+    [array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
 }
