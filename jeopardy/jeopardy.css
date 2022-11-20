@@ -1,0 +1,21 @@
+/* some colors you may find useful:
+  #115ff4
+  #060ce9
+  #28a200
+  #8d2ab5
+  #74119c
+*/
+
+body {
+  background-color: #115ff4;
+}
+
+#start {
+  background-color: #8d2ab5;
+  padding: 1em 3em;
+  border: none;
+  border-radius: 0.5em;
+  color: white;
+  font-size: 1em;
+  margin: 0.5em 0;
+}
