@@ -8,7 +8,7 @@ Check out the
 
 ### What are differences between ``display: inline`` and ``display: block``?
 
-``display: inline``dictates that the width of an HTML element is limited to the width of its content, and any width and height properties specified will be ignored. Elements with this property are also displayed side by side on the same line.
+``display: inline`` dictates that the width of an HTML element is limited to the width of its content, and any width and height properties specified will be ignored. Elements with this property are also displayed side by side on the same line.
 
 ``display: block`` dictates that the width of an HTML element defaults to the full width of its parent, unless width and height are specified. Every element with this property are displayed on a new line below the previous element.
 
@@ -27,7 +27,7 @@ jQuery is a JavaScript library that makes DOM manipulation/navigation, event han
 ### What are differences between finding things with
 `document.querySelector(".book")` and `$(".book")`?
 
-Finding elements with `$(".book")` returns a jQuery object containing all the elements with the class "book", while using `document.querySelector(".book")` returns the first HTML element with the class "book".
+Finding elements with `$(".book")` returns a jQuery object containing all the elements with the class "book", while using `document.querySelector(".book")` returns the first HTML element encountered with the class "book".
 
 ---
 
@@ -62,13 +62,13 @@ A static method is a direct method of the class it's in, not of an instance obje
 
 ### In JS: `let a = [1, 2, 3]; b = a.slice(); a.push(4);`: does `b` contain 4? Why or why not?
 
-`b` does not contain 4 because `b` is a shallow copy `a`. Although `a` and `b` point to arrays that look similar after `b = a.slice()`, their arrays have different 'addresses' in memory.
+`b` does not contain 4 because although slice() returns a shallow copy of the original array, the elements in `a` are primitive types with no reference address, so the elements in `b` can't point to the elements in `a`.
 
 ### What are some strategies you've learned for being organized in larger projects, like Hack or Snooze?
 
 1. A major strategy I've learned is to split up the backend tasks from the frontend. There are a lot of moving parts in larger projects, so this helps narrow my focus down to only a few related tasks at a time.
 
-2. I've also learned that, often times, when writing in new functions, there are already existing functions that have very similar functionality, and it's much easier to follow the same pattern (modify where needed) to keep code consistent and avoid 'reinventing the wheel', so to speak. Knowing how to identify these recurring patterns are definitely key to avoiding unnecessary tasks and streamlining the workflow.
+2. I've also learned that, often times, when writing in new functions, there are already existing functions that have very similar functionality, and it's much easier to follow the same pattern (modify where needed) to keep code consistent and avoid 'reinventing the wheel', so to speak. Knowing how to identify these recurring patterns are definitely key to streamlining the workflow.
 
 ---
 
@@ -80,7 +80,7 @@ A hostname is the 'nickname' assigned to a server on the computer network. A ser
 
 ### What is an IP address?
 
-An IP address is the numeric address unique to an individual computer on the computer network
+An IP address is the numeric address unique to an individual computer on the computer network.
 
 ### What is a port?
 
@@ -88,25 +88,25 @@ A port is essentially the address of any service or software in the server that 
 
 ### What is DNS?
 
-The Domain Name System converts human-readable, easy-to-remember hostnames to IP addresses, so that servers and clients can communicate to each other.
+The Domain Name System converts human-readable, easy-to-remember hostnames to IP addresses, so that servers and clients can identify and communicate with each other.
 
 ### What is an HTTP header?
 
-An HTTP header contains metadata of the HTTP request/response, including the content type and the request method.
+An HTTP header contains metadata of the HTTP request/response, which includes the content type and the request method, amongst other properties.
 
 ### What is an HTTP Response Code?
 
-An HTTP Response Code is the JSON string returned from an HTTP request.
+An HTTP Response Code is a 3-digit code sent in response to an HTTP request. It describes the status of the request (ie. 200 = successful).
 
 ### What is the difference between GET and POST?
 
 The HTTP `GET` request is how the client retrieves data from a server when a user clicks on links on a page or searches anything on the browser. The arguments of a `GET` request are passed along in a query string.
 
-The HTTP `POST` request securely sends data from the client to the server. The arguments of a `POST` request are passed in the body of a request, formatted as a JSON string. This type of request is especially useful for sending sensitive information like passwords.
+The HTTP `POST` request securely sends data from the client to the server. The arguments of a `POST` request are passed in the body of a request. This type of request is especially useful for sending sensitive information like passwords.
 
 ### What is AJAX? Why would you use it?
 
-AJAX (Asynchronous JavaScript And XML) is a set of techniques used  sending/receiving HTTP requests/responses using JavaScript in browser without refreshing the page upon response. By default, traditional HTTP requests will get a response and replace the entire webpage with the `GET` result, which becomes problematic when a user only wants to update or interact with parts of a page.
+AJAX (Asynchronous JavaScript And XML) is a set of techniques used for sending/receiving HTTP requests/responses using JavaScript in browser without refreshing the page upon response. By default, traditional HTTP requests will get a response and replace the entire webpage with the `GET` result, which becomes problematic when a user only wants to update or interact with parts of a page.
 
 For example, without using AJAX, a user scrolling through their Twitter feed would reload their entire page upon scrolling to the bottom of their feed to load more content. With AJAX, the user's feed can be updated asynchronously, while the rest of the Twitter page remains as is. This way, the server doesn't have to send the entire page content, which makes for a faster, more efficient web application.
 
@@ -116,13 +116,15 @@ JSON (JavaScript Object Notation) is a standardized format for sending informati
 
 ### What is an API?
 
-An API (application programming interface) is a set of clearly defined methods used for communicating with various components of a software. What occurs under the hood when these methods are called are abstracted from the user.
+An API (application programming interface) is a set of clearly defined methods used for communicating with a software. What occurs under the hood when these methods are called are abstracted from the user.
 
 ### What are some limitations of AJAX requests?
 
 1. Unless this default setting is changed, AJAX requests may be blocked if the request originates from a different hostname/protocol/port than the API URL.
 
 2. Because they're asynchronous, AJAX requests may make it more difficult to debug code.
+
+3. Browsers must be able to support JavaScript.
 
 ### What is the Same Origin Policy?
 

@@ -2,6 +2,7 @@
 
 // max # of categories that can be returned from API
 const MAX_COUNT = 100;
+const BASE_API_URL = "https://jservice.io/api";
 
 /** Game class: manages game construction
  *
@@ -52,8 +53,11 @@ class Game {
   async fetchCategoryBatch(count) {
     console.debug("fetchCatBatch");
 
-    const response = await axios.get(
-        `${BASE_API_URL}categories`, {params: { count }});
+    const response = await axios({
+      url: `${BASE_API_URL}/categories`,
+      method: "GET",
+      params: { count }
+    });
 
     return response.data;
   }
@@ -67,7 +71,7 @@ class Game {
 
     const categoryBatch = await this.fetchCategoryBatch(MAX_COUNT);
 
-    // get the first 6 categories in randomized categoryBatch
+    // get the first this.numCategories categories in randomized categoryBatch
     const randomizedBatch = FYRandom(categoryBatch);
     const randomCategories = randomizedBatch.slice(0, this.numCategories);
 
@@ -90,7 +94,6 @@ class Game {
     const catIds = await this.getRandomCategoryIds();
 
     for (let catId of catIds) {
-      // TODO: Add necessary code to fetch category data & generate
       // new instance for each catId. Populate categories array accordingly.
 
       const category = await Category.getCategory(catId, this.numCluesPerCat);
@@ -152,9 +155,10 @@ class Category {
    *   ]
    */
   static async getCategory(id, numCluesPerCat) {
-    // this is used to populate this.categories
+    // this will be used to populate this.categories
     const allCatData = await this.fetchCategoryDetail(id);
 
+    // create array of clue instances
     const allClueData = allCatData.clues.slice(0, numCluesPerCat);
     const clues = allClueData.map(clue => new Clue(clue.question, clue.answer));
 
@@ -196,12 +200,10 @@ class Clue {
 
 /** Fisher-Yates Shuffle used to get random array of category IDs */
 function FYRandom(array) {
-  let currentIndex = array.length
+  let currentIndex = array.length;
   let randomIndex = null;
 
-  // While there remain elements to shuffle.
   while (currentIndex != 0) {
-    // Pick a remaining element and decrement currentIndex
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
 

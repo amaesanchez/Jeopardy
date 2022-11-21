@@ -1,16 +1,13 @@
-/* some colors you may find useful:
-  #115ff4
-  #060ce9
-  #28a200
-  #8d2ab5
-  #74119c
-*/
-
+/* general */
 body {
   background-color: #115ff4;
 }
 
-/** header design */
+.hidden {
+  display: none;
+}
+
+/* header design */
 #start {
   background-color: #8d2ab5;
   padding: 1em 3em;
@@ -23,14 +20,6 @@ body {
 
 #start:hover {
   background-color: #74119c;
-}
-
-.success {
-  background-color: #28a200;
-}
-
-.hidden {
-  display: none;
 }
 
 #header {
@@ -46,18 +35,19 @@ body {
 }
 
 
-/** gameboard design */
+/* gameboard design */
 #jeopardy {
   margin-top: 20px;
   background-color: #060ce9;
   color: white;
   table-layout: fixed;
-}
-
-#jeopardy td {
-  height: 80px;
+  height: 500px;
 }
 
 #jeopardy td:hover {
   background-color:#115ff4;
+}
+
+.success {
+  background-color: #28a200;
 }

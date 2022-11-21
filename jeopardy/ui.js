@@ -1,11 +1,7 @@
 "use strict";
 
-const BASE_API_URL = "https://jservice.io/api/";
-
 // Value of game will become the Game instance populated below
 let game;
-
-const $jeopardyTable = $("#jeopardy");
 
 /** Fill the HTML table #jeopardy with the categories & cells for questions.
  *
@@ -15,12 +11,12 @@ const $jeopardyTable = $("#jeopardy");
  *   (initially, just show a "?" where the question/answer would go.)
  */
 function fillTable() {
-  // create a thead elem with numCluesPerCat <th>s
-  // for every cat in game.categories, append th with cat title
-  // append game.numCluesPerCat <tr>s with game.categories.length <td>s inside
-  // to <tbody>
+  // create a thead elem with game.categories.length <th>s
+  // each <th> will have category title
+  // create game.numCluesPerCat <tr>s with game.categories.length <td>s inside
+    // append to <tbody>
 
-  $jeopardyTable.append(
+  $("#jeopardy").append(
     $(`
     <thead id="categories" class="text-center">
       <tr id="category-titles">
@@ -33,7 +29,7 @@ function fillTable() {
   // populates header of table
   for (let i = 0; i < game.categories.length; i++) {
     $("#category-titles").append(
-      $(`<th>${game.categories[i].title}</th>`)
+      $(`<th>${game.categories[i].title.toUpperCase()}</th>`)
     );
   }
 
@@ -63,12 +59,12 @@ function fillTable() {
 function handleClick(evt) {
   // evt.currentTarget refers to the element
     //  to which the event handler has been attached!
-  // get clue instance and update showing status (index of tr)
+  // get index of clue (index of tr) in clues array
   // get clue instance by getting category instance (index of td)
 
-  const clueInstance = $(evt.currentTarget).parent().index();
-  const catInstance = $(evt.currentTarget).index();
-  const clueCard = game.categories[catInstance].clues[clueInstance];
+  const clueIndex = $(evt.currentTarget).parent().index();
+  const catIndex = $(evt.currentTarget).index();
+  const clueCard = game.categories[catIndex].clues[clueIndex];
 
   if (clueCard.showing === null) {
     $(evt.currentTarget).html(`${clueCard.question}`);
@@ -117,7 +113,4 @@ async function startGame() {
 $("#start").on("click", startGame);
 $("#jeopardy").on("click", "td", handleClick);
 
-
-// BUG: when you click on the question mark icon,
-// handclick still executes but the icon is not removed
-// and the background of the
+// Note: not sure how to prevent table cell from resizing as text is shown
