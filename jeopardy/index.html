@@ -16,68 +16,44 @@
       href="https://www.unpkg.com/bootstrap-icons/font/bootstrap-icons.css"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap@5/dist/css/bootstrap.css"
+    />
+    <link
+      href="https://fonts.cdnfonts.com/css/movie-monster"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="jeopardy.css" />
   </head>
-  <body>
-    <h1 class="">Jeopardy!</h1>
-    <button class="" id="start">Start</button>
 
-    <div id="jeopardy" class="container">
-      <!-- <table>
-            <tr id="category-header">
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-            </tr>
-            <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-            </tr>
-            <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-            </tr>
-            <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-            </tr>
-            <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-            </tr>
-            <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-            </tr>
-      </table> -->
+  <body>
+    <!-- Jeopardy header -->
+    <div class="container d-flex justify-content-center" id="title">
+      <div class="text-center">
+        <h1 id="header">Jeopardy!</h1>
+        <button id="start">Start</button>
+      </div>
+    </div>
+
+    <!-- Loading spinner icon -->
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border text-warning hidden" id="loading" role="status">
+      </div>
+    </div>
+
+    <!-- jeopardy gameboard -->
+    <div class="container text-center col-7">
+      <table
+        id="jeopardy"
+        class="table table-bordered align-middle hidden"
+      ></table>
     </div>
 
     <script src="https://unpkg.com/jquery"></script>
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="https://unpkg.com/lodash"></script>
+    <script src="https://unpkg.com/bootstrap@5/dist/js/bootstrap.bundle.js"></script>
     <script src="models.js"></script>
     <script src="ui.js"></script>
   </body>

@@ -10,6 +10,7 @@ body {
   background-color: #115ff4;
 }
 
+/** header design */
 #start {
   background-color: #8d2ab5;
   padding: 1em 3em;
@@ -20,7 +21,43 @@ body {
   margin: 0.5em 0;
 }
 
-/** game table */
-#gameboard {
-  /* display: hidden; */
+#start:hover {
+  background-color: #74119c;
+}
+
+.success {
+  background-color: #28a200;
+}
+
+.hidden {
+  display: none;
+}
+
+#header {
+  font-family: 'Movie Monster', sans-serif;
+  font-size:80px;
+  color: white;
+}
+
+#loading {
+  margin-top: 100px;
+  width: 200px;
+  height: 200px;
+}
+
+
+/** gameboard design */
+#jeopardy {
+  margin-top: 20px;
+  background-color: #060ce9;
+  color: white;
+  table-layout: fixed;
+}
+
+#jeopardy td {
+  height: 80px;
+}
+
+#jeopardy td:hover {
+  background-color:#115ff4;
 }

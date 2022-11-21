@@ -1,5 +1,8 @@
 "use strict";
 
+// max # of categories that can be returned from API
+const MAX_COUNT = 100;
+
 /** Game class: manages game construction
  *
  *  Game will have:
@@ -62,7 +65,7 @@ class Game {
   async getRandomCategoryIds() {
     console.debug("getRandomCatIds");
 
-    let categoryBatch = await this.fetchCategoryBatch(100) //100??
+    const categoryBatch = await this.fetchCategoryBatch(MAX_COUNT);
 
     // get the first 6 categories in randomized categoryBatch
     const randomizedBatch = FYRandom(categoryBatch);
