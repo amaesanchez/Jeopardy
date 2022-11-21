@@ -28,12 +28,12 @@ body {
   color: white;
 }
 
+/* spinner design */
 #loading {
   margin-top: 100px;
   width: 200px;
   height: 200px;
 }
-
 
 /* gameboard design */
 #jeopardy {

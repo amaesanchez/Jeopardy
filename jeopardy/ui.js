@@ -61,16 +61,17 @@ function handleClick(evt) {
     //  to which the event handler has been attached!
   // get index of clue (index of tr) in clues array
   // get clue instance by getting category instance (index of td)
+  const $currCell = $(evt.currentTarget);
 
-  const clueIndex = $(evt.currentTarget).parent().index();
-  const catIndex = $(evt.currentTarget).index();
+  const clueIndex = $currCell.parent().index();
+  const catIndex = $currCell.index();
   const clueCard = game.categories[catIndex].clues[clueIndex];
 
   if (clueCard.showing === null) {
-    $(evt.currentTarget).html(`${clueCard.question}`);
+    $currCell.html(`${clueCard.question}`);
   } else if (clueCard.showing === "question") {
-    $(evt.currentTarget).html(`${clueCard.answer}`);
-    $(evt.currentTarget).attr("style", "background-color: #28a200");
+    $currCell.html(`${clueCard.answer}`);
+    $currCell.attr("style", "background-color: #28a200");
   }
 
   clueCard.updateShowingStatus();
@@ -113,4 +114,4 @@ async function startGame() {
 $("#start").on("click", startGame);
 $("#jeopardy").on("click", "td", handleClick);
 
-// Note: not sure how to prevent table cell from resizing as text is shown
+// Note: not sure how to prevent table cell from resizing as text is shown.

@@ -54,7 +54,7 @@ JavaScript will throw a syntax error.
 
 ### What happens if you forget the `await` keyword in front of an asynchronous expression?
 
-The asynchronous expression will execute and return a promise.
+The asynchronous expression will execute without waiting for the expression to complete, and return a promise.
 
 ### What is the difference between a static method and an instance method?
 
