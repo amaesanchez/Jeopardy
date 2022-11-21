@@ -83,7 +83,7 @@ function handleClick(evt) {
 function showLoadingState() {
   $("#loading").show();
   $("#start").text("Loading...");
-  $("#jeopardy").hide();
+  $("#jeopardy").hide().empty();
 }
 
 /**
@@ -102,7 +102,6 @@ function hideLoadingState() {
  */
 async function startGame() {
   showLoadingState();
-  $("#jeopardy").empty();
 
   game = new Game(6, 5);
   await game.populateCategoryData();
