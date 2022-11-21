@@ -72,11 +72,11 @@ class Game {
     const categoryBatch = await this.fetchCategoryBatch(MAX_COUNT);
 
     // get the first this.numCategories categories in randomized categoryBatch
-    // filters out titles that are a single character (they have no clues)
-      // or filters out categories with less than 5 clues
+    // filters out titles that with less than 5 clues
     const randomizedBatch = FYRandom(categoryBatch);
+
     const validRandomizedBatch = randomizedBatch.filter(category =>
-      category.title.length !== 1 || category.clues_count >= 5);
+      category.clues_count >= 5);
 
     const randomCategories = validRandomizedBatch.slice(0, this.numCategories);
     const randomIDs = randomCategories.map(cat => cat.id);
